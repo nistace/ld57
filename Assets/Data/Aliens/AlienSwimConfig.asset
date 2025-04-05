@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5218debe493349008bcb314d7a269c2a, type: 3}
+  m_Name: AlienSwimConfig
+  m_EditorClassIdentifier: 
+  propelAction: {fileID: -5210881426037684051, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  orientAction: {fileID: -8339124235305800044, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  propelSpeedPerPreparationTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: 0.82213044
+      outSlope: 0.82213044
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.15354331
+    - serializedVersion: 3
+      time: 1
+      value: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  decelerationRate: 2
+  brakingDecelerationRate: 4
+  maxRotationPerSecond: 60
