@@ -8,6 +8,7 @@ namespace LD57.Aliens {
       [SerializeField] private Rigidbody2D bodyRigid;
       [SerializeField] private AlienLandStateController landStateController;
       [SerializeField] private AlienSwimStateController swimStateController;
+      [SerializeField] private WaterDetector waterDetector;
 
       public IStateController CurrentState { get; private set; }
       public Vector2 Velocity => bodyRigid.linearVelocity;
@@ -22,10 +23,10 @@ namespace LD57.Aliens {
       }
 
       private void Update() {
-         if (CurrentState is AlienLandStateController && transform.position.y < 0) {
+         if (CurrentState is AlienLandStateController && waterDetector.IsInWater) {
             ChangeState(swimStateController);
          }
-         else if (CurrentState is AlienSwimStateController && transform.position.y > 0) {
+         else if (CurrentState is AlienSwimStateController && !waterDetector.IsInWater) {
             ChangeState(landStateController);
          }
       }
