@@ -3,7 +3,7 @@
 namespace LD57.Aliens {
    public class AlienLandStateController : MonoBehaviour, IStateController {
       [SerializeField] private AlienLandConfig config;
-      [SerializeField] private GroundChecker groundChecker;
+      [SerializeField] private TriggerChecker groundChecker;
 
       public float GravityScale => 1;
 
@@ -16,14 +16,12 @@ namespace LD57.Aliens {
       }
 
       public void Tick(ref Vector2 currentVelocity) {
-         if (Mathf.Abs(currentVelocity.y) < .1f) {
-            transform.up = Vector3.up;
-         }
+         TickRotation(currentVelocity);
 
          var walkInput = config.WalkAction.action.ReadValue<float>();
 
-         currentVelocity = groundChecker.IsOnGround
-            ? EvaluateNewVelocity(currentVelocity, walkInput * config.WalkMaxSpeed, config.WalkAcceleration)
+         currentVelocity = groundChecker.IsValid
+            ? EvaluateNewVelocity(currentVelocity, walkInput * config.WalkMaxSpeed, walkInput < .2f ? config.WalkDeceleration : config.WalkAcceleration)
             : EvaluateNewVelocity(currentVelocity, walkInput * config.FlightMaxSpeed, config.FlightAcceleration);
       }
 
@@ -33,6 +31,20 @@ namespace LD57.Aliens {
          var velocityX = Mathf.MoveTowards(currentVelocity.x, targetSpeed, acceleration * Time.deltaTime);
 
          return new Vector2(velocityX, currentVelocity.y);
+      }
+
+      private void TickRotation(Vector2 currentVelocity) {
+         if (groundChecker.IsValid) {
+            transform.up = Vector3.up;
+            return;
+         }
+
+         var rotationAngle = -Vector2.SignedAngle(Vector2.up, transform.up);
+
+         var maxRotation = Mathf.Max(0, (1 - currentVelocity.y) * config.MaxRotationPerSecond * Time.deltaTime);
+         rotationAngle = Mathf.Clamp(rotationAngle, -maxRotation, maxRotation);
+
+         transform.Rotate(Vector3.forward, rotationAngle);
       }
    }
 }
