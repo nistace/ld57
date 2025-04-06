@@ -19,16 +19,16 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 2
-      inSlope: 0.82213044
-      outSlope: 0.82213044
-      tangentMode: 0
+      value: 1
+      inSlope: 14
+      outSlope: 14
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.15354331
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 10
+      value: 15
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -39,6 +39,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   gravityScale: 0.05
-  decelerationRate: 2
-  brakingDecelerationRate: 4
-  maxRotationPerSecond: 120
+  decelerationRate: 3
+  brakingDecelerationRate: 8
+  maxRotationPerSecond: 180

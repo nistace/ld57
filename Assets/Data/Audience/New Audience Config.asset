@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fd96d93ffd4310a9c165d9e650ebec, type: 3}
+  m_Name: New Audience Config
+  m_EditorClassIdentifier: 
+  interestOnStart: 380
+  maxInterest: 500
+  audienceInterestLossOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.00010402138
+      outSlope: -0.00010402138
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 1
+    - serializedVersion: 3
+      time: 60
+      value: 1
+      inSlope: 0.030665508
+      outSlope: -0.00012902748
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.11082662
+      outWeight: 0.15237716
+    - serializedVersion: 3
+      time: 300
+      value: 2
+      inSlope: -0.00022598072
+      outSlope: -0.00022598072
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12727292
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  showDuration: 600
+  overridingEmotesDuration: 1
+  interestEmotes:
+  - emote: {fileID: 11400000, guid: e3c7efb9e81b12a48b62af7b3a009e86, type: 2}
+    aboveRatio: 0.8
+  - emote: {fileID: 11400000, guid: d9919826e50beef489ea74c74576b7fe, type: 2}
+    aboveRatio: 0.6
+  - emote: {fileID: 11400000, guid: 63bbdd7346a5dee41973e03f0dfa62ea, type: 2}
+    aboveRatio: 0.3
+  - emote: {fileID: 11400000, guid: d40df23d8b1ed2e45985a2414e4befc1, type: 2}
+    aboveRatio: 0
+  defaultInterestEmote:
+    emote: {fileID: 11400000, guid: d40df23d8b1ed2e45985a2414e4befc1, type: 2}
+    aboveRatio: 0
+  collectibleReactions: []
+  defaultCollectibleReaction:
+    collectibleTypes: []
+    firstTimeEmote: {fileID: 11400000, guid: 6b3657376666f8142a53d019d20aba42, type: 2}
+    defaultEmote: {fileID: 11400000, guid: e9430800e287a4843ae01c6b18632e53, type: 2}
+    interestCoefficientPerTimesCollected: 0.5

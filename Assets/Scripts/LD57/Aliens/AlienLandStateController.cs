@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using LD57.Common;
+using UnityEngine;
 
 namespace LD57.Aliens {
    public class AlienLandStateController : MonoBehaviour, IStateController {
@@ -6,6 +7,7 @@ namespace LD57.Aliens {
       [SerializeField] private TriggerChecker groundChecker;
 
       public float GravityScale => 1;
+      public bool OnGround => groundChecker.IsValid;
 
       public void EnableState() {
          config.WalkAction.action.Enable();
@@ -21,7 +23,7 @@ namespace LD57.Aliens {
          var walkInput = config.WalkAction.action.ReadValue<float>();
 
          currentVelocity = groundChecker.IsValid
-            ? EvaluateNewVelocity(currentVelocity, walkInput * config.WalkMaxSpeed, walkInput < .2f ? config.WalkDeceleration : config.WalkAcceleration)
+            ? EvaluateNewVelocity(currentVelocity, walkInput * config.WalkMaxSpeed, Mathf.Abs(walkInput) < .2f ? config.WalkDeceleration : config.WalkAcceleration)
             : EvaluateNewVelocity(currentVelocity, walkInput * config.FlightMaxSpeed, config.FlightAcceleration);
       }
 

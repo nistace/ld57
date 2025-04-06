@@ -8,10 +8,12 @@ namespace LD57.Aliens {
       [SerializeField] private Rigidbody2D bodyRigid;
       [SerializeField] private AlienLandStateController landStateController;
       [SerializeField] private AlienSwimStateController swimStateController;
+      [SerializeField] private AlienInteractionController interactionController;
       [SerializeField] private WaterDetector waterDetector;
 
       public IStateController CurrentState { get; private set; }
       public Vector2 Velocity => bodyRigid.linearVelocity;
+      public AlienInteractionController InteractionController => interactionController;
 
       private void Reset() {
          landStateController = GetComponent<AlienLandStateController>();
@@ -32,6 +34,8 @@ namespace LD57.Aliens {
       }
 
       private void FixedUpdate() {
+         interactionController.Tick();
+
          var velocity = bodyRigid.linearVelocity;
          CurrentState.Tick(ref velocity);
          bodyRigid.linearVelocity = velocity;
@@ -57,10 +61,14 @@ namespace LD57.Aliens {
 
       private void OnDrawGizmos() {
          if (!Application.isPlaying) return;
-         if (CurrentState is not AlienSwimStateController alienSwimStateController) return;
-
-         Gizmos.color = Color.red;
-         Gizmos.DrawSphere(CameraController.CursorToWorldPoint(alienSwimStateController.Config.OrientAction.action.ReadValue<Vector2>()), .5f);
+         if (CurrentState is AlienSwimStateController alienSwimStateController) {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(CameraController.CursorToWorldPoint(alienSwimStateController.Config.OrientAction.action.ReadValue<Vector2>()), .5f);
+         }
+         if (interactionController.TryGetCurrentInteractableInteractionPoint(out var point)) {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(point, .5f);
+         }
       }
    }
 }

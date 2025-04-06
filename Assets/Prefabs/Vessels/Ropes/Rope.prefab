@@ -45,10 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ropeChunkPrefab: {fileID: 4088927526980077726, guid: 8a1bd167de1314a47a00ddfb926a6533, type: 3}
-  origin: {fileID: 0}
   destination: {fileID: 0}
   points: []
   ropeChunks: []
   collidingLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128

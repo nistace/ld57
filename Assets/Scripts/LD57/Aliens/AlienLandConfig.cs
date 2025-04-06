@@ -13,12 +13,11 @@ namespace LD57.Aliens {
       [SerializeField] private float maxRotationPerSecond = 2;
 
       public InputActionReference WalkAction => walkAction;
-
       public float WalkMaxSpeed => walkMaxSpeed;
       public float WalkAcceleration => walkAcceleration;
       public float WalkDeceleration => walkDeceleration;
       public float FlightMaxSpeed => flightMaxSpeed;
       public float FlightAcceleration => flightAcceleration;
-      public float MaxRotationPerSecond { get; set; }
+      public float MaxRotationPerSecond => maxRotationPerSecond;
    }
 }
