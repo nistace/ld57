@@ -1,9 +1,11 @@
-﻿using LD57.Cameras;
+﻿using System;
+using LD57.Cameras;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace LD57.Aliens {
    public class AlienSwimStateController : MonoBehaviour, IStateController {
+      [SerializeField] private Rigidbody2D selfBody;
       [SerializeField] private AlienSwimConfig config;
       [SerializeField] private Transform rotationPoint;
 
@@ -12,7 +14,12 @@ namespace LD57.Aliens {
       public float PropelPreparationTime { get; private set; }
       public float GravityScale => config.GravityScale;
 
+      private void Awake() {
+         DisableState();
+      }
+
       public void EnableState() {
+         selfBody.linearDamping = config.DecelerationRate;
          config.PropelAction.action.Enable();
          config.OrientAction.action.Enable();
       }
@@ -22,30 +29,29 @@ namespace LD57.Aliens {
          config.OrientAction.action.Disable();
       }
 
-      public void Tick(ref Vector2 currentVelocity) {
+      public void Tick() {
          TickRotation();
-         currentVelocity = TickVelocity(currentVelocity);
+         TickVelocity();
       }
 
-      private Vector2 TickVelocity(Vector2 velocity) {
+      private void TickVelocity() {
          var wasPreparingPropel = IsPreparingPropel;
          IsPreparingPropel = config.PropelAction.action.phase == InputActionPhase.Performed;
 
          if (IsPreparingPropel) {
+            selfBody.linearDamping = config.BrakingDecelerationRate;
             PropelPreparationTime += Time.deltaTime;
-
-            return Vector2.MoveTowards(velocity, Vector2.zero, velocity.magnitude * config.BrakingDecelerationRate * Time.deltaTime);
          }
+         else {
+            selfBody.linearDamping = config.DecelerationRate;
+            if (wasPreparingPropel) {
+               var speed = config.PropelSpeedPerPreparationTime.Evaluate(PropelPreparationTime);
 
-         if (wasPreparingPropel) {
-            var speed = config.PropelSpeedPerPreparationTime.Evaluate(PropelPreparationTime);
+               PropelPreparationTime = 0;
 
-            PropelPreparationTime = 0;
-
-            return velocity + (Vector2)transform.up * speed;
+               selfBody.AddForce((Vector2)transform.up * speed, ForceMode2D.Impulse);
+            }
          }
-
-         return Vector2.MoveTowards(velocity, Vector2.zero, velocity.magnitude * config.DecelerationRate * Time.deltaTime);
       }
 
       private void TickRotation() {

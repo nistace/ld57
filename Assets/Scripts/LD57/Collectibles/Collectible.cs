@@ -26,6 +26,7 @@ namespace LD57.Collectibles {
       public void DisableOnCollected() {
          selfBody.bodyType = RigidbodyType2D.Kinematic;
          selfCollider.enabled = false;
+         selfBody.constraints = RigidbodyConstraints2D.FreezeAll;
          foreach (var behaviourToStopOnCollected in behavioursToStopOnCollected) {
             behaviourToStopOnCollected.enabled = false;
          }
@@ -33,5 +34,15 @@ namespace LD57.Collectibles {
 
       public float GetInteractionPriority(IInteractor interactor) =>
          interactor.PickedObject == null ? 100 - Vector3.SqrMagnitude(interactor.InteractionOrigin.position - interactionPoint.position) : -1;
+
+      public void Drop() {
+         selfBody.bodyType = RigidbodyType2D.Dynamic;
+         selfCollider.enabled = true;
+         selfBody.constraints = RigidbodyConstraints2D.None;
+         foreach (var behaviourToStopOnCollected in behavioursToStopOnCollected) {
+            behaviourToStopOnCollected.enabled = true;
+         }
+         transform.SetParent(null);
+      }
    }
 }

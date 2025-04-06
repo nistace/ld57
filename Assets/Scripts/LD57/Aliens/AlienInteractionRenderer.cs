@@ -7,7 +7,7 @@ namespace LD57.Aliens {
 
       private Vector3 position;
 
-      private void Update() {
+      private void LateUpdate() {
          interactionRenderer.enabled = alien && alien.InteractionController.TryGetCurrentInteractableInteractionPoint(out position);
          interactionRenderer.transform.position = position;
       }

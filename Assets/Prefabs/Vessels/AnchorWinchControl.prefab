@@ -153,6 +153,7 @@ MonoBehaviour:
   anchorWinch: {fileID: 0}
   vesselBody: {fileID: 0}
   winchForce: 500
+  autoRetractSpeed: 5
 --- !u!1 &8651171158919588568
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ namespace LD57.Vessels.Anchors {
          interactor.UnsetPickedObject(anchor);
       }
 
-      private void AttachAnchor() {
+      public void AttachAnchor() {
          anchor.AttachTo(this, Vector3.zero, Vector3.up);
          anchor.transform.rotation = anchorAnchorAttach.rotation;
          anchorRope.ResetRope();

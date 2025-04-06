@@ -10,7 +10,6 @@ namespace LD57.Aliens {
       [SerializeField] private Transform interactionOrigin;
       [SerializeField] private InteractableDetector interactableDetector;
       [SerializeField] private Rigidbody2D selfBody;
-      [SerializeField] private float maxInteractionDistance = 10;
 
       private IInteractable CurrentInteractable { get; set; }
       private bool IsInteracting { get; set; }
@@ -18,6 +17,43 @@ namespace LD57.Aliens {
       public IPickable PickedObject { get; private set; }
       public Transform AnchorAttachPointReference => interactionOrigin;
       public IAnchorAttachable.WinchEffect EffectOnWinchActivation => IAnchorAttachable.WinchEffect.MoveAnchor;
+
+      private void Awake() {
+         Disable();
+      }
+
+      private void OnDestroy() {
+         Disable();
+      }
+
+      public void SetEnabled(bool controlled) {
+         if (controlled) Enable();
+         else Disable();
+      }
+
+      private void Enable() {
+         config.InteractionAction.action.Enable();
+         config.DropAction.action.Enable();
+         config.DropAction.action.performed += HandleDropPerformed;
+      }
+
+      private void Disable() {
+         CurrentInteractable = null;
+         DropPickedObject();
+         IsInteracting = false;
+
+         config.InteractionAction.action.Disable();
+         config.DropAction.action.Disable();
+         config.DropAction.action.performed -= HandleDropPerformed;
+      }
+
+      private void HandleDropPerformed(InputAction.CallbackContext obj) => DropPickedObject();
+
+      private void DropPickedObject() {
+         if (PickedObject == null) return;
+         PickedObject.Drop();
+         PickedObject = null;
+      }
 
       public void Move(Vector2 force) {
          selfBody.AddForce(force, ForceMode2D.Force);

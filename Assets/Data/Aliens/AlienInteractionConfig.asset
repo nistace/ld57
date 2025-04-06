@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: AlienInteractionConfig
   m_EditorClassIdentifier: 
   interactionAction: {fileID: -488740995769146703, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  dropAction: {fileID: -206047389228053624, guid: 052faaac586de48259a63d0c4782560b, type: 3}

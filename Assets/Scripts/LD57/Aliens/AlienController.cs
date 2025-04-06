@@ -34,11 +34,9 @@ namespace LD57.Aliens {
       }
 
       private void FixedUpdate() {
+         if (CurrentState == null) return;
          interactionController.Tick();
-
-         var velocity = bodyRigid.linearVelocity;
-         CurrentState.Tick(ref velocity);
-         bodyRigid.linearVelocity = velocity;
+         CurrentState.Tick();
       }
 
       [ContextMenu("Iterate through states")]
@@ -48,6 +46,11 @@ namespace LD57.Aliens {
             AlienSwimStateController => landStateController,
             _ => landStateController
          });
+      }
+
+      public void SetControlled(bool controlled) {
+         ChangeState(controlled ? landStateController : default);
+         interactionController.SetEnabled(controlled);
       }
 
       private void ChangeState(IStateController newState) {

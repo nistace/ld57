@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: AlienLandConfig
   m_EditorClassIdentifier: 
   walkAction: {fileID: -2567147659650063031, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  walkMaxSpeed: 2
-  walkAcceleration: 60
-  walkDeceleration: 5000
-  flightMaxSpeed: 1
-  flightAcceleration: 50
+  linearDamping: 1
+  walkSpeed: 2
   maxRotationPerSecond: 2

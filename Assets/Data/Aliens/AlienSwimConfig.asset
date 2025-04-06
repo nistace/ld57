@@ -39,6 +39,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   gravityScale: 0.05
-  decelerationRate: 3
-  brakingDecelerationRate: 8
+  decelerationRate: 2
+  brakingDecelerationRate: 4
   maxRotationPerSecond: 180

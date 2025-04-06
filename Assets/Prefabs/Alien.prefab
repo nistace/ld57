@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc79d2fd4ac4503bdcc9f6c74faec21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfBody: {fileID: 2110386995315045583}
   config: {fileID: 11400000, guid: d36ca78e0296ffc488fbcc2bee7f9aff, type: 2}
   groundChecker: {fileID: 8859980912117303846}
 --- !u!114 &8984394112378348343
@@ -164,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ab059dad9b478ab63578a33ea20d54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfBody: {fileID: 2110386995315045583}
   config: {fileID: 11400000, guid: f365e4c5680ca514faeeda7f81079b85, type: 2}
   rotationPoint: {fileID: 2258486823492519944}
 --- !u!114 &8780683012791257599
@@ -204,7 +206,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -224,7 +226,6 @@ MonoBehaviour:
   interactionOrigin: {fileID: 2258486823492519944}
   interactableDetector: {fileID: 1172256516258420903}
   selfBody: {fileID: 0}
-  maxInteractionDistance: 2
 --- !u!1 &3200801256634184346
 GameObject:
   m_ObjectHideFlags: 0

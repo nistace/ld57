@@ -13,6 +13,7 @@ namespace LD57.Vessels.Anchors {
       [SerializeField] private AnchorWinch anchorWinch;
       [SerializeField] private Rigidbody2D vesselBody;
       [SerializeField] private float winchForce = 200;
+      [SerializeField] private float autoRetractSpeed = 1;
 
       public string ActionDisplayInfo => "Activate Anchor Winch";
       public InteractionType InteractionType => InteractionType.Hold;
@@ -20,6 +21,7 @@ namespace LD57.Vessels.Anchors {
 
       public void Interact(IInteractor interactor) {
          if (anchorWinch.IsAnchorInPlace) return;
+         if (!anchorWinch.Anchor.Attached) return;
 
          switch (anchorWinch.Anchor.AttachedTo.EffectOnWinchActivation) {
             case IAnchorAttachable.WinchEffect.None:
@@ -40,7 +42,17 @@ namespace LD57.Vessels.Anchors {
          return 2;
       }
 
-      private void Update() {
+      private void FixedUpdate() {
+         if (anchorWinch.IsAnchorInPlace) return;
+         if (anchorWinch.Anchor.Attached) return;
+
+         anchorWinch.Anchor.transform.position = Vector3.MoveTowards(anchorWinch.Anchor.transform.position, anchorWinch.AnchorRope.GetRopeOneBeforeEnd(), Time.deltaTime * autoRetractSpeed);
+         if (Vector3.SqrMagnitude(anchorWinch.Anchor.transform.position - anchorWinch.transform.position) < .05f) {
+            anchorWinch.AttachAnchor();
+         }
+      }
+
+      private void LateUpdate() {
          if (attachedToRope.TryGetPointOnRopeFromEnd(offsetWithEndOfRope, out var point, out var up)) {
             transform.position = point;
             transform.rotation = Quaternion.LookRotation(Vector3.forward, up);

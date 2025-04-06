@@ -1,4 +1,5 @@
-
+using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace LD57.Common {
@@ -7,6 +8,11 @@ namespace LD57.Common {
       [SerializeField] private Rigidbody2D selfBody;
       [SerializeField] private SpriteRenderer selfRenderer;
       [SerializeField] private bool goesRight;
+
+      private void OnEnable() {
+         selfBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+         transform.rotation = quaternion.LookRotation(Vector3.forward, Vector3.up);
+      }
 
       private void FixedUpdate() {
          selfRenderer.flipX = goesRight;

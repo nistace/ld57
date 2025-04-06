@@ -13,7 +13,7 @@ namespace LD57.Vessels.Anchors {
       private Vector3 AttachedRelativePosition { get; set; }
       private Vector3 AttachedRelativeUp { get; set; }
 
-      private bool Attached => AttachedTo != null;
+      public bool Attached => AttachedTo != null;
 
       public Vector3 GetInteractionPoint(Vector3 interactingActor) => transform.position;
       public bool CanInteractWhenInteractingWith(IPickable heldPickable) => heldPickable == null;
@@ -25,6 +25,7 @@ namespace LD57.Vessels.Anchors {
       }
 
       public float GetInteractionPriority(IInteractor interactor) => interactor.PickedObject == null ? 1 : -1;
+      public void Drop() => Detach();
 
       private void Update() {
          RefreshAttachedPosition();
