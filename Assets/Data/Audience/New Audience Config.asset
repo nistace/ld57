@@ -47,7 +47,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  showDuration: 420
+  showDuration: 300
   overridingEmotesDuration: 1
   interestEmotes:
   - emote: {fileID: 11400000, guid: e3c7efb9e81b12a48b62af7b3a009e86, type: 2}
