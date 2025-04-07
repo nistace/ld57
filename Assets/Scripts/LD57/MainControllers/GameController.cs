@@ -95,7 +95,7 @@ namespace LD57.MainControllers {
       private LeaderboardWebRequest.PostData GenerateLeaderboardPostData() {
          var leaderboardData = new LeaderboardWebRequest.PostData { alienName = alienCustomization.AlienName, score = audienceController.Score };
          Color.RGBToHSV(alienCustomization.BodyColor, out var bodyHue, out _, out _);
-         leaderboardData.NormalizedEyeHue = bodyHue;
+         leaderboardData.NormalizedBodyHue = bodyHue;
          Color.RGBToHSV(alienCustomization.EyeColor, out var eyeHue, out _, out _);
          leaderboardData.NormalizedEyeHue = eyeHue;
          leaderboardData.DeathPosition = alienController.transform.position;
