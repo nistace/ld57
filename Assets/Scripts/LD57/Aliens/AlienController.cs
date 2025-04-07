@@ -19,11 +19,7 @@ namespace LD57.Aliens {
          landStateController = GetComponent<AlienLandStateController>();
          swimStateController = GetComponent<AlienSwimStateController>();
       }
-
-      private void Start() {
-         ChangeState(landStateController);
-      }
-
+      
       private void Update() {
          if (CurrentState is AlienLandStateController && waterDetector.IsInWater) {
             ChangeState(swimStateController);
