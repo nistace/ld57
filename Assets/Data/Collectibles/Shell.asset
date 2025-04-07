@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Shell
   m_EditorClassIdentifier: 
   displayName: Empty Shell
+  aDisplayName: an Empty Shell
   collectionScore: 20
-  collectionInterest: 10
+  collectionInterest: 20

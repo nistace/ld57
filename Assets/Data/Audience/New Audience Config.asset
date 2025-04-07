@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fd96d93ffd4310a9c165d9e650ebec, type: 3}
   m_Name: New Audience Config
   m_EditorClassIdentifier: 
-  interestOnStart: 380
-  maxInterest: 500
+  interestOnStart: 240
+  maxInterest: 300
   audienceInterestLossOverTime:
     serializedVersion: 2
     m_Curve:
@@ -47,7 +47,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  showDuration: 600
+  showDuration: 420
   overridingEmotesDuration: 1
   interestEmotes:
   - emote: {fileID: 11400000, guid: e3c7efb9e81b12a48b62af7b3a009e86, type: 2}
@@ -67,3 +67,4 @@ MonoBehaviour:
     firstTimeEmote: {fileID: 11400000, guid: 6b3657376666f8142a53d019d20aba42, type: 2}
     defaultEmote: {fileID: 11400000, guid: e9430800e287a4843ae01c6b18632e53, type: 2}
     interestCoefficientPerTimesCollected: 0.5
+  pointOfInterestReaction: {fileID: 11400000, guid: 6b3657376666f8142a53d019d20aba42, type: 2}

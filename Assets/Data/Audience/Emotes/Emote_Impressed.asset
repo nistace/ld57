@@ -13,3 +13,15 @@ MonoBehaviour:
   m_Name: Emote_Impressed
   m_EditorClassIdentifier: 
   sprite: {fileID: -179003205, guid: 0fe1d806862a86e4a8e5d0a151c5e9f2, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: 7cfbab04faa3e5642b00ff48724e4254, type: 3}
+  - {fileID: 8300000, guid: 21097a49567704a48a5103afb928130f, type: 3}
+  - {fileID: 8300000, guid: e13d2a47bafdb9840874162c9b1cbc46, type: 3}
+  - {fileID: 8300000, guid: ae352c407eae6cd40a560b3ff7e355f5, type: 3}
+  - {fileID: 8300000, guid: 8b987bc79270159449d1878c3f907540, type: 3}
+  - {fileID: 8300000, guid: 850f95e7b041af84fb1590716e66af5f, type: 3}
+  - {fileID: 8300000, guid: 15ec84a99c079a4468b267d489850ff6, type: 3}
+  - {fileID: 8300000, guid: a10dac071a611e8459b90c916960eced, type: 3}
+  - {fileID: 8300000, guid: 8cfb141de6796ab4b82ba9d04f1c0d26, type: 3}
+  - {fileID: 8300000, guid: c79861699ab83584e92e01998bf52484, type: 3}
+  - {fileID: 8300000, guid: 7e42439fb28f4a745956f8742aa186ca, type: 3}

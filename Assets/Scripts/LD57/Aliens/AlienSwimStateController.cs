@@ -1,6 +1,7 @@
 ﻿using System;
 using LD57.Cameras;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace LD57.Aliens {
@@ -14,6 +15,10 @@ namespace LD57.Aliens {
       public float PropelPreparationTime { get; private set; }
       public float GravityScale => config.GravityScale;
 
+      public UnityEvent OnStateEnabled { get; } = new UnityEvent();
+      public UnityEvent OnPreparePropelStarted { get; } = new UnityEvent();
+      public UnityEvent OnPropelTriggered { get; } = new UnityEvent();
+
       private void Awake() {
          DisableState();
       }
@@ -22,6 +27,7 @@ namespace LD57.Aliens {
          selfBody.linearDamping = config.DecelerationRate;
          config.PropelAction.action.Enable();
          config.OrientAction.action.Enable();
+         OnStateEnabled.Invoke();
       }
 
       public void DisableState() {
@@ -41,15 +47,21 @@ namespace LD57.Aliens {
          if (IsPreparingPropel) {
             selfBody.linearDamping = config.BrakingDecelerationRate;
             PropelPreparationTime += Time.deltaTime;
+            if (!wasPreparingPropel) {
+               OnPreparePropelStarted.Invoke();
+            }
          }
          else {
             selfBody.linearDamping = config.DecelerationRate;
             if (wasPreparingPropel) {
                var speed = config.PropelSpeedPerPreparationTime.Evaluate(PropelPreparationTime);
 
+               if (speed <= 0) return;
+
                PropelPreparationTime = 0;
 
                selfBody.AddForce((Vector2)transform.up * speed, ForceMode2D.Impulse);
+               OnPropelTriggered.Invoke();
             }
          }
       }

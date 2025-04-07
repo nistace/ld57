@@ -15,12 +15,14 @@ namespace LD57.Audience {
       [SerializeField] private InterestEmote defaultInterestEmote;
       [SerializeField] private CollectibleReaction[] collectibleReactions;
       [SerializeField] private CollectibleReaction defaultCollectibleReaction;
+      [SerializeField] private AudienceEmote pointOfInterestReaction;
 
       public float InterestOnStart => interestOnStart;
       public float MaxInterest => maxInterest;
       public AnimationCurve AudienceInterestLossOverTime => audienceInterestLossOverTime;
       public float OverridingEmotesDuration => overridingEmotesDuration;
       public float ShowDuration => showDuration;
+      public AudienceEmote PointOfInterestReaction => pointOfInterestReaction;
 
       public AudienceEmote GetInterestEmote(float interestRatio) {
          foreach (var emote in interestEmotes) {

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Rubber Duck
   collectionScore: 200
-  collectionInterest: 70
+  collectionInterest: 140

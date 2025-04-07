@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Statuette
   collectionScore: 150
-  collectionInterest: 40
+  collectionInterest: 80

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DeadlyWaste
   m_EditorClassIdentifier: 
   displayName: Deadly Waste
+  aDisplayName: Deadly Waste
   collectionScore: 100
-  collectionInterest: 30
+  collectionInterest: 60

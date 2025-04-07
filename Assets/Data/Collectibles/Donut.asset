@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Donut
   collectionScore: 40
-  collectionInterest: 20
+  collectionInterest: 40

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ropeChunkPrefab: {fileID: 4088927526980077726, guid: 8a1bd167de1314a47a00ddfb926a6533, type: 3}
   destination: {fileID: 0}
+  safeRadiusAroundExtremities: 1
   points: []
   ropeChunks: []
   collidingLayers:

@@ -14,6 +14,7 @@ namespace LD57.Collectibles {
       public string ActionDisplayInfo => "Collect";
       private readonly List<Collectible> collectiblesBeingCollected = new List<Collectible>();
 
+      public UnityEvent<Collectible> OnCollectionStarted { get; } = new UnityEvent<Collectible>();
       public UnityEvent<Collectible> OnCollected { get; } = new UnityEvent<Collectible>();
 
       public Vector3 GetInteractionPoint(Vector3 interactionOrigin) => interactionPoint.position;
@@ -27,6 +28,7 @@ namespace LD57.Collectibles {
 
          collectiblesBeingCollected.Add(collectible);
          animator.SetTrigger(suckAnimParam);
+         OnCollectionStarted.Invoke(collectible);
       }
 
       public float GetInteractionPriority(IInteractor interactor) {

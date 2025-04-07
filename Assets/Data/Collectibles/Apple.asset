@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   displayName: Apple
+  aDisplayName: an Apple
   collectionScore: 20
-  collectionInterest: 10
+  collectionInterest: 20

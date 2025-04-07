@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Shell With a Pearl
   collectionScore: 800
-  collectionInterest: 100
+  collectionInterest: 200

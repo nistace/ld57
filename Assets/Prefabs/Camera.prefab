@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameCamera: {fileID: 4325636384433285776}
+  alienCamera: {fileID: 0}
+  vesselCamera: {fileID: 0}
 --- !u!114 &5587696963106091461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +150,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.91
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

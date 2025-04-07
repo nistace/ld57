@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2fa14ae2524edf9e4c36c3140d9e9d, type: 3}
   m_Name: Tire
   m_EditorClassIdentifier: 
+  displayName: Tire
   collectionScore: 80
-  collectionInterest: 20
+  collectionInterest: 40

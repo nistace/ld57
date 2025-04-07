@@ -2,6 +2,7 @@
 using LD57.Common;
 using LD57.Interactables;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace LD57.Vessels.Anchors {
    public class AnchorWinchControl : MonoBehaviour, IInteractable {
@@ -15,9 +16,14 @@ namespace LD57.Vessels.Anchors {
       [SerializeField] private float winchForce = 200;
       [SerializeField] private float autoRetractSpeed = 1;
 
+      private bool ActivePreviousFrame { get; set; }
+      private bool ActiveThisFrame { get; set; }
       public string ActionDisplayInfo => "Activate Anchor Winch";
       public InteractionType InteractionType => InteractionType.Hold;
       public Vector3 GetInteractionPoint(Vector3 interactionOrigin) => interactionPoint.position;
+
+      public UnityEvent OnActivated { get; } = new UnityEvent();
+      public UnityEvent OnDeactivated { get; } = new UnityEvent();
 
       public void Interact(IInteractor interactor) {
          if (anchorWinch.IsAnchorInPlace) return;
@@ -35,6 +41,7 @@ namespace LD57.Vessels.Anchors {
             default:
                throw new ArgumentOutOfRangeException();
          }
+         ActiveThisFrame = true;
       }
 
       public float GetInteractionPriority(IInteractor interactor) {
@@ -43,16 +50,6 @@ namespace LD57.Vessels.Anchors {
       }
 
       private void FixedUpdate() {
-         if (anchorWinch.IsAnchorInPlace) return;
-         if (anchorWinch.Anchor.Attached) return;
-
-         anchorWinch.Anchor.transform.position = Vector3.MoveTowards(anchorWinch.Anchor.transform.position, anchorWinch.AnchorRope.GetRopeOneBeforeEnd(), Time.deltaTime * autoRetractSpeed);
-         if (Vector3.SqrMagnitude(anchorWinch.Anchor.transform.position - anchorWinch.transform.position) < .05f) {
-            anchorWinch.AttachAnchor();
-         }
-      }
-
-      private void LateUpdate() {
          if (attachedToRope.TryGetPointOnRopeFromEnd(offsetWithEndOfRope, out var point, out var up)) {
             transform.position = point;
             transform.rotation = Quaternion.LookRotation(Vector3.forward, up);
@@ -62,6 +59,23 @@ namespace LD57.Vessels.Anchors {
          else {
             objectRoot.gameObject.SetActive(false);
          }
+
+         if (anchorWinch.IsAnchorInPlace) return;
+         if (anchorWinch.Anchor.Attached) return;
+
+         anchorWinch.Anchor.transform.position = Vector3.MoveTowards(anchorWinch.Anchor.transform.position, anchorWinch.AnchorRope.GetRopeOneBeforeEnd(), Time.deltaTime * autoRetractSpeed);
+         ActiveThisFrame = true;
+         if (Vector3.SqrMagnitude(anchorWinch.Anchor.transform.position - anchorWinch.transform.position) < .05f) {
+            anchorWinch.AttachAnchor();
+         }
+      }
+
+      private void LateUpdate() {
+         if (ActivePreviousFrame && !ActiveThisFrame) OnDeactivated.Invoke();
+         if (!ActivePreviousFrame && ActiveThisFrame) OnActivated.Invoke();
+
+         ActivePreviousFrame = ActiveThisFrame;
+         ActiveThisFrame = false;
       }
    }
 }

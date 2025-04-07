@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: Emote_NotImpressed
   m_EditorClassIdentifier: 
   sprite: {fileID: 1103105089, guid: 0fe1d806862a86e4a8e5d0a151c5e9f2, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: 1cca440ca721f99458343d779a6e1b08, type: 3}
+  - {fileID: 8300000, guid: 5bb5ef5c2f4fb004a9f2c659d797050e, type: 3}
+  - {fileID: 8300000, guid: de59c155ca52cb54c923217ab24dfcab, type: 3}
+  - {fileID: 8300000, guid: b9dbcb59af2ae5842899151afa713a8e, type: 3}

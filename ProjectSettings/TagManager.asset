@@ -19,8 +19,8 @@ TagManager:
   - SafeAreaInWater
   - InteractionDetection
   - Interactable
-  - 
-  - 
+  - PointOfInterest
+  - PointOfInterestFinder
   - 
   - 
   - 
