@@ -18,7 +18,7 @@ namespace LD57.MainControllers {
       private void Start() {
          alien.RandomizeName();
 
-         nameInput.text = alien.AlienName;
+         nameInput.text = string.Empty;
          bodySlider.SetColor(alien.BodyColor);
          eyeSlider.SetColor(alien.EyeColor);
 
