@@ -6,6 +6,7 @@ using LD57.Cameras;
 using LD57.Tutorial;
 using LD57.Web;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace LD57.MainControllers {
@@ -20,6 +21,8 @@ namespace LD57.MainControllers {
       [SerializeField] private AlienDummy alienDummyPrefab;
 
       private LeaderboardWebRequest.GetResult.Entry[] leaderboard = { };
+
+      public static UnityEvent<LeaderboardWebRequest.GetResult.Entry[]> OnLeaderboardUpdated { get; } = new UnityEvent<LeaderboardWebRequest.GetResult.Entry[]>();
 
       private void Start() {
          cameraController.ActivateCamera(CameraController.CameraTarget.Alien);
@@ -63,6 +66,7 @@ namespace LD57.MainControllers {
       }
 
       private IEnumerator PlayIntro() {
+         yield return null;
          yield return StartCoroutine(LeaderboardWebRequest.Get(new LeaderboardWebRequest.GetData(), HandleLeaderboardReceived, HandleLeaderboardFailed));
          newGameCanvas.gameObject.SetActive(true);
       }
@@ -75,6 +79,8 @@ namespace LD57.MainControllers {
             var dummyInstance = Instantiate(alienDummyPrefab);
             dummyInstance.Setup(dummy.alienName, dummy.NormalizedBodyHue, dummy.NormalizedEyeHue, dummy.DeathPosition, Mathf.CeilToInt(dummy.score * .1f));
          }
+
+         OnLeaderboardUpdated.Invoke(leaderboard);
       }
 
       private void EndGame() {
@@ -82,6 +88,10 @@ namespace LD57.MainControllers {
          audienceController.EndShow();
          endGameCanvas.gameObject.SetActive(true);
          endGameCanvas.SetButtonsVisible(false);
+         if (leaderboard != null) {
+            leaderboard = leaderboard.Append(new LeaderboardWebRequest.GetResult.Entry { alienName = alienCustomization.AlienName, score = audienceController.Score }).ToArray();
+            OnLeaderboardUpdated.Invoke(leaderboard);
+         }
          endGameCanvas.RefreshMessage(leaderboard.Select(t => t.score).ToArray());
          cameraController.ActivateCamera(CameraController.CameraTarget.Vessel);
          StartCoroutine(LeaderboardWebRequest.Post(GenerateLeaderboardPostData(), HandleLeaderboardPostCallback, HandleLeaderboardPostFailed));
