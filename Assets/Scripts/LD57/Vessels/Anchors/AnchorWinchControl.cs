@@ -60,19 +60,20 @@ namespace LD57.Vessels.Anchors {
             objectRoot.gameObject.SetActive(false);
          }
 
-         if (anchorWinch.IsAnchorInPlace) return;
-         if (anchorWinch.Anchor.Attached) return;
-
-         anchorWinch.Anchor.transform.position = Vector3.MoveTowards(anchorWinch.Anchor.transform.position, anchorWinch.AnchorRope.GetRopeOneBeforeEnd(), Time.deltaTime * autoRetractSpeed);
-         ActiveThisFrame = true;
-         if (Vector3.SqrMagnitude(anchorWinch.Anchor.transform.position - anchorWinch.transform.position) < .05f) {
-            anchorWinch.AttachAnchor();
+         if (!anchorWinch.IsAnchorInPlace && !anchorWinch.Anchor.Attached) {
+            anchorWinch.Anchor.transform.position = Vector3.MoveTowards(anchorWinch.Anchor.transform.position, anchorWinch.AnchorRope.GetRopeOneBeforeEnd(), Time.deltaTime * autoRetractSpeed);
+            ActiveThisFrame = true;
+            if (Vector3.SqrMagnitude(anchorWinch.Anchor.transform.position - anchorWinch.transform.position) < .05f) {
+               anchorWinch.AttachAnchor();
+            }
          }
-      }
 
-      private void LateUpdate() {
-         if (ActivePreviousFrame && !ActiveThisFrame) OnDeactivated.Invoke();
-         if (!ActivePreviousFrame && ActiveThisFrame) OnActivated.Invoke();
+         if (ActivePreviousFrame && !ActiveThisFrame) {
+            OnDeactivated.Invoke();
+         }
+         else if (!ActivePreviousFrame && ActiveThisFrame) {
+            OnActivated.Invoke();
+         }
 
          ActivePreviousFrame = ActiveThisFrame;
          ActiveThisFrame = false;

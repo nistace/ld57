@@ -10,6 +10,11 @@ namespace LD57.Vessels.Anchors {
          winchControl.OnDeactivated.AddListener(HandleWinchDeactivated);
       }
 
+      private void OnDestroy() {
+         winchControl.OnActivated.RemoveListener(HandleWinchActivated);
+         winchControl.OnDeactivated.RemoveListener(HandleWinchDeactivated);
+      }
+
       private void HandleWinchDeactivated() => Source.Stop();
       private void HandleWinchActivated() => Source.Play();
    }
